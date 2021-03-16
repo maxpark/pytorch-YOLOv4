@@ -455,10 +455,11 @@ if  __name__ == "__main__":
         model.cuda()
 
     img = Image.open(imgfile).convert('RGB')
-    sized = img.resize((608, 608))
+    #--sized = img.resize((608, 608))
+    sized = img.resize((416, 416))
     from tool.utils import *
 
-    boxes = do_detect(model, sized, 0.5, n_classes,0.4, use_cuda)
+    boxes = do_detect(model, sized, 0.4, n_classes,0.4, use_cuda)
 
     class_names = load_class_names(namesfile)
     plot_boxes(img, boxes, 'predictions.jpg', class_names)
