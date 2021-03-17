@@ -344,9 +344,10 @@ def plot_boxes(img, boxes, savename=None, class_names=None):
         return int(r * 255)
 
     #---
-    fontsize = 25
+    fontsize = 13
     #font = ImageFont.truetype("/usr/share/fonts/truetype/humor-sans/Humor-Sans.ttf", fontsize)
-    font = ImageFont.truetype("/usr/share/fonts/truetype/liberation/LiberationSerif-Bold.ttf", fontsize)
+    #font = ImageFont.truetype("/usr/share/fonts/truetype/liberation/LiberationSerif-Bold.ttf", fontsize)
+    font = ImageFont.truetype("/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf", fontsize)
 
     width = img.width
     height = img.height
@@ -358,7 +359,8 @@ def plot_boxes(img, boxes, savename=None, class_names=None):
         x2 = (box[0] + box[2] / 2.0) * width
         y2 = (box[1] + box[3] / 2.0) * height
 
-        rgb = (255, 0, 0)
+        rgb = (255, 255, 0) #(255, 0, 0)
+        rgb2 = (0, 0, 0)
         if len(box) >= 7 and class_names:
             cls_conf = box[5]
             cls_id = box[6]
@@ -368,14 +370,17 @@ def plot_boxes(img, boxes, savename=None, class_names=None):
             red = get_color(2, offset, classes)
             green = get_color(1, offset, classes)
             blue = get_color(0, offset, classes)
-            rgb = (red, green, blue)
+         #  rgb = (red, green, blue)
+
+            draw.rectangle([x1, y1-11, x1+7, y1], fill=True)
             #draw.text((x1, y1), class_names[cls_id], fill=rgb)
-            draw.text((x1, y1-25), class_names[cls_id], fill=rgb, font=font)
+            draw.text((x1, y1-13), class_names[cls_id], fill=rgb, font=font)
         draw.rectangle([x1, y1, x2, y2], outline=rgb)
     if savename:
         print("save plot results to %s" % savename)
         img.save(savename)
     return img
+
 
 
 def read_truths(lab_path):
