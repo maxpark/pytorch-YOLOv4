@@ -26,6 +26,7 @@ from easydict import EasyDict as edict
 from torch.nn import functional as F
 
 import numpy as np
+from shutil import copyfile
 
 
 def bboxes_iou(bboxes_a, bboxes_b, xyxy=True):
@@ -366,6 +367,7 @@ def train(model, device, config, epochs=5, batch_size=1, save_cp=True, log_step=
                 torch.save(model.state_dict(), os.path.join(config.checkpoints, f'Yolov4_epoch{epoch + 1}.pth'))
                 logging.info(f'Checkpoint {epoch + 1} saved !')
 
+        copyfile('checkpoints/Yolov4_epoch'+epoch+'.pth' , '/content/drive/MyDrive/')
     writer.close()
 
 
