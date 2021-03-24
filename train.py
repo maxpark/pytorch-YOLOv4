@@ -367,7 +367,8 @@ def train(model, device, config, epochs=5, batch_size=1, save_cp=True, log_step=
                 torch.save(model.state_dict(), os.path.join(config.checkpoints, f'Yolov4_epoch{epoch + 1}.pth'))
                 logging.info(f'Checkpoint {epoch + 1} saved !')
 
-        copyfile('checkpoints/Yolov4_epoch'+str(epoch+1)+'.pth' , '/content/drive/MyDrive/')
+        file_num = epoch + 1
+        copyfile('checkpoints/Yolov4_epoch'+str(file_num)+'.pth' , '/content/drive/MyDrive/Yolov4_epoch'+str(file_num)+'.pth')
     writer.close()
 
 
